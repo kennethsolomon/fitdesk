@@ -1,0 +1,8 @@
+- Pint
+- Larastan
+- Rector PHP
+- Pest
+- Inertia
+- PHP 8.2
+- Laravel 12
+- Peck

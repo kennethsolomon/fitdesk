@@ -1,0 +1,15 @@
+### Post to Collaboration Manager Endpoint
+POST http://localhost/api/collaboration_manager/email
+Content-Type: application/json
+
+{
+  "messageID": "o7ua3oaqt4roo111gqqrs6q1jtvcvi7kq9tupkg2",
+  "source": "mark.carriedo@cloud-kinetics.com",
+  "destination": ["collaboration_maanger@localhost"],
+  "Subject": "0003804",
+  "Content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat, aliquam provident rerum eos dignissimos tempora, vitae fugiat, maiores distinctio totam assumenda laudantium id nesciunt voluptates tempore? Tempore blanditiis suscipit laborum.",
+  "Attachments": [
+    "/organization/9b0e39f1-9ff6-47dc-8198-d6305ecd492a/clients/9b56aea6-b628-4d5a-bffb-84c056bd44c7/temp_external_job_document/1724128927_FP14999-12745L - 410 Horseshoe Bend Road, Armstrong Creek - Landscape_C.pdf"
+  ],
+  "EmbeddedAttachments": []
+}
