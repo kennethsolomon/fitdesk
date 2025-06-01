@@ -16,6 +16,7 @@
         "tightenco/ziggy": "^2.4"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^3.5",
         "fakerphp/faker": "^1.23",
         "larastan/larastan": "^3.0",
         "laravel/pail": "^1.2.2",
@@ -68,6 +69,10 @@
         "test": [
             "@php artisan config:clear --ansi",
             "@php artisan test"
+        ],
+        "post-update-cmd": [
+            "@php artisan ide-helper:generate",
+            "@php artisan ide-helper:meta"
         ]
     },
     "extra": {
