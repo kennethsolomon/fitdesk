@@ -43,3 +43,7 @@
    - If the member has an active subscription, update it if the customer wants to change the plan.
    - If the member does not have an active subscription, create a new one.
 2. Check-in the member. [Always check if member is active and if it has a subscription]
+
+
+## Notes for Developers
+- After subscription update will be working on the member page FE.
