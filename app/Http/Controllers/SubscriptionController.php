@@ -21,6 +21,7 @@ final class SubscriptionController extends Controller
 
     public function store(CreateSubscriptionRequest $request, Member $member, CreateSubscription $action): RedirectResponse
     {
+        // Check if the member exists.
         if ($member->status !== MemberStatus::Active) {
             return redirect(route('subscriptions.index'))
                 ->withErrors(['member' => 'Only active members can be subscribed.']);
