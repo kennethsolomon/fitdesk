@@ -80,3 +80,37 @@ it('redirects to subscriptions index when member is not active', function () {
             'member' => 'Only active members can be subscribed.',
         ]);
 });
+
+it('redirects to subscriptions index when member has an active subscription', function () {
+    // Arrange...
+    $user = User::factory()->create()->fresh();
+    $member = Member::factory()->create([
+        'status' => MemberStatus::Active->value,
+    ])->fresh();
+
+    Subscription::factory()->create([
+        'member_id' => $member->id,
+        'status' => SubscriptionStatus::Active->value,
+    ]);
+
+    // Act...
+    $response = $this
+        ->actingAs($user)
+        ->from(route('subscriptions.index'))
+        ->post(route('members.subscription.store', $member), [
+            'type' => SubscriptionType::Monthly->value,
+            'start_date' => Carbon::now(),
+            'end_date' => Carbon::now()->addMonth(),
+            'amount_paid' => 1000,
+            'duration' => 1,
+            'status' => SubscriptionStatus::Active->value,
+
+            'member_id' => $member->id,
+        ]);
+
+    // Assert...
+    $response->assertRedirectToRoute('subscriptions.index')
+        ->assertSessionHasErrors([
+            'member' => 'This member already has an active subscription.',
+        ]);
+});

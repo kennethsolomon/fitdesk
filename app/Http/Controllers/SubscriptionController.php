@@ -26,6 +26,12 @@ final class SubscriptionController extends Controller
                 ->withErrors(['member' => 'Only active members can be subscribed.']);
         }
 
+        // Only one subscription per member is allowed.
+        if ($member->subscriptions()->exists() && $member->subscriptions()->where('status', '!=', 'expired')->exists()) {
+            return redirect(route('subscriptions.index'))
+                ->withErrors(['member' => 'This member already has an active subscription.']);
+        }
+
         /** @var array{type: string, start_date: string, end_date: string, amount_paid: int, duration: int, status: string}  $validated */
         $validated = $request->validated();
 
