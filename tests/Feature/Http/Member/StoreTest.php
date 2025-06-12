@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Enums\MemberStatus;
+use App\Enums\Member\MemberStatus;
 use App\Models\Member;
 use App\Models\User;
 use Carbon\Carbon;

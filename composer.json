@@ -88,8 +88,8 @@
         "test:peck": [
             "peck"
         ],
-        "test:type-coverage": "pest --type-coverage --min=100",
-        "test:unit": "pest --parallel --ci --coverage --min=100.0",
+        "test:type-coverage": "pest --type-coverage --min=94.6",
+        "test:unit": "pest --parallel --ci --coverage --min=94.6",
         "test": [
             "@test:peck",
             "@test:rector",

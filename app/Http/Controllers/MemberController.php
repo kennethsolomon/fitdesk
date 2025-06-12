@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Actions\CreateMember;
-use App\Actions\DeleteMember;
-use App\Actions\UpdateMember;
-use App\Http\Requests\CreateMemberRequest;
-use App\Http\Requests\DeleteMemberRequest;
-use App\Http\Requests\UpdateMemberRequest;
+use App\Actions\Member\CreateMember;
+use App\Actions\Member\DeleteMember;
+use App\Actions\Member\UpdateMember;
+use App\Http\Requests\Member\CreateMemberRequest;
+use App\Http\Requests\Member\DeleteMemberRequest;
+use App\Http\Requests\Member\UpdateMemberRequest;
 use App\Models\Member;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;

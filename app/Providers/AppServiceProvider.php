@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Vite;
@@ -18,6 +20,7 @@ final class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->configureCommands();
+        $this->configureDates();
         $this->configureModels();
         $this->configureUrl();
         $this->configureVite();
@@ -31,6 +34,14 @@ final class AppServiceProvider extends ServiceProvider
         DB::prohibitDestructiveCommands(
             $this->app->isProduction(),
         );
+    }
+
+    /**
+     * Configure the dates.
+     */
+    private function configureDates(): void
+    {
+        Date::use(CarbonImmutable::class);
     }
 
     /**

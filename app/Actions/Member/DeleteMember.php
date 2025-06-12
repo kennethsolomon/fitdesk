@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Actions;
+namespace App\Actions\Member;
 
 use App\Models\Member;
 use Illuminate\Support\Facades\DB;
