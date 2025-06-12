@@ -39,20 +39,32 @@ final class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
-        [$message, $author] = str(Inspiring::quotes()->random())->explode('-');
+        /** @var string $quote */
+        $quote = Inspiring::quotes()->random();
+        /** @var string $message */
+        /** @var string $author */
+        [$message, $author] = str($quote)->explode('-');
 
-        return [
-            ...parent::share($request),
-            'name' => config('app.name'),
-            'quote' => ['message' => mb_trim($message), 'author' => mb_trim($author)],
-            'auth' => [
-                'user' => $request->user(),
-            ],
-            'ziggy' => [
-                ...(new Ziggy)->toArray(),
-                'location' => $request->url(),
-            ],
-            'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
-        ];
+        /** @var array<string, mixed> $parent */
+        $parent = parent::share($request);
+
+        return array_merge(
+            $parent,
+            [
+                'name' => config('app.name'),
+                'quote' => [
+                    'message' => mb_trim($message),
+                    'author' => mb_trim($author),
+                ],
+                'auth' => [
+                    'user' => $request->user(),
+                ],
+                'ziggy' => array_merge(
+                    (new Ziggy)->toArray(),
+                    ['location' => $request->url()]
+                ),
+                'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
+            ]
+        );
     }
 }

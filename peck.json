@@ -2,7 +2,23 @@
     "preset": "laravel",
     "ignore": {
         "words": [
-            "php"
+            "php",
+            "filesystems",
+            "favicon",
+            "js",
+            "octicons",
+            "jquery",
+            "eslint",
+            "fitdesk",
+            "nav",
+            "dropdown",
+            "viewport",
+            "utils",
+            "tooltip",
+            "composables",
+            "ssr",
+            "globals",
+            "tsconfig"
         ],
         "paths": []
     }

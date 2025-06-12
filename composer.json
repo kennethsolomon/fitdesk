@@ -10,24 +10,25 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "inertiajs/inertia-laravel": "^2.0",
-        "laravel/framework": "^12.0",
+        "inertiajs/inertia-laravel": "^2.0.2",
+        "laravel/framework": "^12.17",
         "laravel/tinker": "^2.10.1",
-        "tightenco/ziggy": "^2.4"
+        "tightenco/ziggy": "^2.5.3"
     },
     "require-dev": {
-        "barryvdh/laravel-ide-helper": "^3.5",
-        "fakerphp/faker": "^1.23",
-        "larastan/larastan": "^3.0",
+        "barryvdh/laravel-ide-helper": "^3.5.5",
+        "fakerphp/faker": "^1.24.1",
+        "larastan/larastan": "^3.4",
         "laravel/pail": "^1.2.2",
-        "laravel/pint": "^1.22",
-        "laravel/sail": "^1.41",
-        "mockery/mockery": "^1.6",
-        "nunomaduro/collision": "^8.6",
+        "laravel/pint": "^1.22.1",
+        "laravel/sail": "^1.43.1",
+        "mockery/mockery": "^1.6.12",
+        "nunomaduro/collision": "^8.8",
         "peckphp/peck": "^0.1.3",
-        "pestphp/pest": "^3.8",
+        "pestphp/pest": "^3.8.2",
         "pestphp/pest-plugin-laravel": "^3.2",
-        "rector/rector": "^2.0"
+        "pestphp/pest-plugin-type-coverage": "^3.5.1",
+        "rector/rector": "^2.0.17"
     },
     "autoload": {
         "psr-4": {
@@ -48,8 +49,7 @@
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
-        ],
-        "post-root-package-install": [
+        ], "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
         "post-create-project-cmd": [
@@ -66,13 +66,37 @@
             "Composer\\Config::disableProcessTimeout",
             "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"php artisan inertia:start-ssr\" --names=server,queue,logs,ssr"
         ],
-        "test": [
-            "@php artisan config:clear --ansi",
-            "@php artisan test"
-        ],
         "post-update-cmd": [
             "@php artisan ide-helper:generate",
             "@php artisan ide-helper:meta"
+        ],
+        "rector": [
+            "rector"
+        ],
+        "lint": [
+            "pint"
+        ],
+        "test:rector": [
+            "rector --dry-run"
+        ],
+        "test:lint": [
+            "pint --test"
+        ],
+        "test:types": [
+            "phpstan analyse"
+        ],
+        "test:peck": [
+            "peck"
+        ],
+        "test:type-coverage": "pest --type-coverage --min=100",
+        "test:unit": "pest --parallel --ci --coverage --min=100.0",
+        "test": [
+            "@test:peck",
+            "@test:rector",
+            "@test:lint",
+            "@test:types",
+            "@test:type-coverage",
+            "@test:unit"
         ]
     },
     "extra": {
