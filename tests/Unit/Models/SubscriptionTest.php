@@ -45,11 +45,11 @@ test('casts', function () {
 });
 
 test('member relation', function () {
-    $subscripotion = Subscription::factory()->create()->fresh();
+    $subscription = Subscription::factory()->create()->fresh();
 
     // Check if the subscriptions relation exists
-    expect($subscripotion->member)->toBeInstanceOf(Member::class);
+    expect($subscription->member)->toBeInstanceOf(Member::class);
 
     // Check if the subscriptions relation has member
-    expect($subscripotion->member->id)->toEqual($subscripotion->member_id);
+    expect($subscription->member->id)->toEqual($subscription->member_id);
 });
