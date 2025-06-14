@@ -28,7 +28,7 @@ final class Subscription extends Model
         return $this->belongsTo(Member::class);
     }
 
-    protected function casts(): array
+    public function casts(): array
     {
         return [
             'start_date' => 'datetime',

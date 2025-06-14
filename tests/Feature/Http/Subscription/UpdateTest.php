@@ -57,7 +57,6 @@ it('may update a subscription', function () {
         ->and($updatedSubscription->status)->toBe(SubscriptionStatus::Active);
 });
 
-// It may deactivate a subscription
 it('may deactivate a subscription', function () {
     // Arrange...
     $user = User::factory()->create()->fresh();
