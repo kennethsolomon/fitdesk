@@ -10,7 +10,7 @@ use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-final class CreateSubscriptionRequest extends FormRequest
+final class UpdateSubscriptionRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -22,12 +22,10 @@ final class CreateSubscriptionRequest extends FormRequest
         return [
             'type' => ['required', 'string', Rule::enum(SubscriptionType::class)],
             'start_date' => ['required', 'date'],
-            'end_date' => ['nullable', 'date'],
-            'amount_paid' => ['nullable', 'integer'],
-            'duration' => ['nullable', 'integer'],
+            'end_date' => ['required', 'date', 'after_or_equal:start_date'],
+            'amount_paid' => ['required', 'integer', 'min:0'],
+            'duration' => ['required', 'integer', 'min:1'],
             'status' => ['required', 'string', Rule::enum(SubscriptionStatus::class)],
-
-            'member_id' => ['required', 'exists:members,id'],
         ];
     }
 

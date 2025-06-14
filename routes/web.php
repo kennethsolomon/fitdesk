@@ -36,6 +36,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
         Route::post('/members/{member}', [SubscriptionController::class, 'store'])
             ->name('members.subscription.store');
+
+        Route::post('/{subscription}/members/{member}', [SubscriptionController::class, 'update'])
+            ->name('members.subscription.update');
     });
 
 });

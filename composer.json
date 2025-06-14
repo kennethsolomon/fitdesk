@@ -70,13 +70,13 @@
             "@php artisan ide-helper:generate",
             "@php artisan ide-helper:meta"
         ],
-        "rector": [
+        "refactor": [
             "rector"
         ],
         "lint": [
             "pint"
         ],
-        "test:rector": [
+        "test:refactor": [
             "rector --dry-run"
         ],
         "test:lint": [
@@ -85,18 +85,18 @@
         "test:types": [
             "phpstan analyse"
         ],
-        "test:peck": [
+        "test:typos": [
             "peck"
         ],
         "test:type-coverage": "pest --type-coverage --min=94.6",
         "test:unit": "pest --parallel --ci --coverage --min=94.6",
         "test": [
-            "@test:peck",
-            "@test:rector",
+            "@test:type-coverage",
+            "@test:typos",
+            "@test:unit",
             "@test:lint",
             "@test:types",
-            "@test:type-coverage",
-            "@test:unit"
+            "@test:refactor"
         ]
     },
     "extra": {

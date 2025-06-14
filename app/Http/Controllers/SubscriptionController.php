@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Actions\Subscription\CreateSubscription;
+use App\Actions\Subscription\UpdateSubscription;
 use App\Enums\Member\MemberStatus;
 use App\Http\Requests\Subscription\CreateSubscriptionRequest;
+use App\Http\Requests\Subscription\UpdateSubscriptionRequest;
 use App\Models\Member;
 use App\Models\Subscription;
 use Illuminate\Http\JsonResponse;
@@ -39,5 +41,22 @@ final class SubscriptionController extends Controller
         $action->handle(attributes: $validated, member: $member);
 
         return redirect(route('subscriptions.index'));
+    }
+
+    public function update(UpdateSubscriptionRequest $request, Subscription $subscription, Member $member, UpdateSubscription $action): RedirectResponse
+    {
+        // Check if the member exists.
+        if ($member->status !== MemberStatus::Active) {
+            return redirect(route('subscriptions.index'))
+                ->withErrors(['member' => 'Only active members can be subscribed.']);
+        }
+
+        /** @var array{type: string, start_date: string, end_date: string, amount_paid: int, duration: int, status: string}  $validated */
+        $validated = $request->validated();
+
+        $action->handle(attributes: $validated, subscription: $subscription);
+
+        return redirect(route('subscriptions.index'));
+
     }
 }
