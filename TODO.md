@@ -1,8 +1,7 @@
 # TODO List
 ## Subscription
 
-- [ ] Update
-- [ ] Delete -> soft delete
+- [X] Update
 
 ## Check-in
 > Create Actions for check-in
